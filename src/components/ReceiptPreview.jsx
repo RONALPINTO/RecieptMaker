@@ -29,9 +29,9 @@ export default function ReceiptPreview({ receiptInfo, billNo, dateStr, timeStr, 
       <div className="preview-card-header no-print">
         <div className="preview-title-group">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M2 12h20"/>
-            <path d="M20 12v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"/>
-            <path d="M4 8V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2"/>
+            <path d="M2 12h20" />
+            <path d="M20 12v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8" />
+            <path d="M4 8V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2" />
           </svg>
           <h3>80mm Thermal Receipt Preview</h3>
         </div>
@@ -41,9 +41,9 @@ export default function ReceiptPreview({ receiptInfo, billNo, dateStr, timeStr, 
           onClick={onPrint}
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="6 9 6 2 18 2 18 9"/>
-            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
-            <rect x="6" y="14" width="12" height="8"/>
+            <polyline points="6 9 6 2 18 2 18 9" />
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+            <rect x="6" y="14" width="12" height="8" />
           </svg>
           Print
         </button>
@@ -64,7 +64,7 @@ export default function ReceiptPreview({ receiptInfo, billNo, dateStr, timeStr, 
           </div>
 
           <div className="receipt-divider">------------------------------------------------------</div>
-          
+
           <div className="receipt-bill-no">BILL NO: {billNo || '3249'}</div>
 
           <div className="receipt-divider">------------------------------------------------------</div>
@@ -188,7 +188,7 @@ export default function ReceiptPreview({ receiptInfo, billNo, dateStr, timeStr, 
           <div className="receipt-divider">------------------------------------------------------</div>
 
           {/* Tax Summary Block */}
-          <div className="receipt-tax-summary">
+          {/* <div className="receipt-tax-summary">
             <div className="summary-row">
               <span>TOTAL GST</span>
               <span>{formatCurrency(summary.totalGst)}</span>
@@ -201,7 +201,7 @@ export default function ReceiptPreview({ receiptInfo, billNo, dateStr, timeStr, 
               <span>NON-TAXABLE</span>
               <span>{formatCurrency(summary.nonTaxable)}</span>
             </div>
-          </div>
+          </div> */}
 
           <div className="receipt-divider">------------------------------------------------------</div>
 
