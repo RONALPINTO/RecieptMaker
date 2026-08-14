@@ -131,8 +131,8 @@ export default function App() {
         grandTotalFormatted={formatCurrency(summary.grandTotal)}
       />
 
-      {/* Main Split Layout: Editor on Left, 80mm Thermal Receipt Live Preview on Right */}
-      <main className="main-layout">
+      {/* Main Split Layout: Editor on Left, 80mm Thermal Receipt Live Preview on Right (Screen view only) */}
+      <main className="main-layout no-print">
         <BillEditor
           items={items}
           billNo={billNo}
@@ -155,6 +155,19 @@ export default function App() {
           onPrint={handlePrint}
         />
       </main>
+
+      {/* Standalone Print-Only Receipt Output (Matches Client Reference Architecture) */}
+      <div className="print-only-receipt">
+        <ReceiptPreview
+          receiptInfo={receiptInfo}
+          billNo={billNo}
+          dateStr={currentDate}
+          timeStr={currentTime}
+          items={items}
+          summary={summary}
+          onPrint={handlePrint}
+        />
+      </div>
 
       {/* Edit Header, Address & Bill Details Modal */}
       <HeaderFooterModal

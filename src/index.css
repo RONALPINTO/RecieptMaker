@@ -1049,47 +1049,106 @@ body {
   background: rgba(15, 23, 42, 0.4);
 }
 
+/* Screen mode default for print-only receipt container */
+.print-only-receipt {
+  display: none;
+}
+
 /* ==========================================================================
    80mm Thermal Printing Specific CSS (@media print)
+   Matches Client Reference Architecture (App.tsx & BillPreview.tsx)
    ========================================================================== */
 @media print {
-  /* Hide all app chrome and interactive controls */
-  .no-print, 
+  @page {
+    size: 80mm auto;
+    margin: 0;
+  }
+
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Reset document root & body to white background without viewport min-height */
+  html,
+  body {
+    width: 80mm !important;
+    max-width: 80mm !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important; /* Neutral white page canvas background */
+    color: #000000 !important;
+  }
+
+  #root,
+  .app-container {
+    width: 80mm !important;
+    max-width: 80mm !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    position: static !important;
+    display: block !important;
+    color: #000000 !important;
+  }
+
+  /* Hide all interactive screen chrome and screen split-layout */
+  .no-print,
   .no-print * {
     display: none !important;
   }
 
-  /* Reset document for clean receipt output */
-  html, body {
-    background: #ffffff !important;
-    color: #000000 !important;
-    margin: 0 !important;
-    padding: 0 !important;
+  /* Standalone Print-Only Receipt Container - Light Beige visual area that ends EXACTLY with receipt content */
+  .print-only-receipt {
+    display: block !important;
     width: 80mm !important;
-    box-shadow: none !important;
-  }
-
-  .app-container {
-    padding: 0 !important;
+    max-width: 80mm !important;
+    height: auto !important;
+    min-height: 0 !important;
     margin: 0 !important;
-    min-height: auto !important;
+    padding: 0 !important;
+    background: #fdf6e2 !important; /* Soft light beige area surrounding white receipt */
+    position: static !important;
+  }
+
+  .print-only-receipt .receipt-preview-container {
+    position: static !important;
+    top: auto !important;
+    width: 80mm !important;
+    max-width: 80mm !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fdf6e2 !important;
     display: block !important;
   }
 
-  .main-layout {
-    display: block !important;
-  }
-
-  /* Expand receipt printable paper */
+  /* Thermal Receipt Paper Container - PURE WHITE WITH DYNAMIC CONTENT HEIGHT */
   .thermal-receipt-paper {
-    width: 78mm !important;
+    width: 78mm !important; /* 78mm white receipt centered inside 80mm beige container to leave 1mm beige side borders */
+    max-width: 78mm !important;
+    height: auto !important;
+    min-height: 0 !important;
     margin: 0 auto !important;
     padding: 2mm !important;
     box-shadow: none !important;
-    background: #ffffff !important;
+    background: #ffffff !important; /* PURE WHITE RECEIPT CONTENT */
     color: #000000 !important;
-    font-family: 'Courier Prime', 'Courier New', Courier, monospace !important;
+    font-family: var(--receipt-font) !important;
     border-radius: 0 !important;
+    border: none !important;
+    position: static !important;
+    display: block !important;
   }
 
   .receipt-zigzag-top,
@@ -1099,19 +1158,32 @@ body {
 
   .receipt-hotel-name {
     font-size: 13pt !important;
+    color: #000000 !important;
   }
 
   .receipt-content-inner {
     font-size: 9pt !important;
+    color: #000000 !important;
+  }
+
+  .receipt-address-line,
+  .receipt-bill-no,
+  .meta-row,
+  .receipt-divider,
+  .receipt-table-header,
+  .receipt-item-line,
+  .summary-row,
+  .receipt-center-notice,
+  .footer-msg,
+  .footer-time {
+    color: #000000 !important;
   }
 
   .receipt-grand-total-row {
     font-size: 12pt !important;
-  }
-
-  @page {
-    size: 80mm auto;
-    margin: 0mm;
+    color: #000000 !important;
   }
 }
+
+
 
