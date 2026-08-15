@@ -64,28 +64,15 @@ export default function HeaderFooterModal({ isOpen, onClose, receiptInfo, onSave
               />
             </div>
 
-            <div className="form-row-2col">
-              <div className="form-group">
-                <label htmlFor="billno-input">Bill No.</label>
-                <input
-                  id="billno-input"
-                  type="text"
-                  className="form-control"
-                  value={formData.billNo || ''}
-                  onChange={(e) => handleChange('billNo', e.target.value)}
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="tableno-input">Table No.</label>
-                <input
-                  id="tableno-input"
-                  type="text"
-                  className="form-control"
-                  value={formData.tableNo || ''}
-                  onChange={(e) => handleChange('tableNo', e.target.value)}
-                />
-              </div>
+            <div className="form-group">
+              <label htmlFor="billno-input">Bill No.</label>
+              <input
+                id="billno-input"
+                type="text"
+                className="form-control"
+                value={formData.billNo || ''}
+                onChange={(e) => handleChange('billNo', e.target.value)}
+              />
             </div>
 
             <div className="form-row-2col">

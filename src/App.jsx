@@ -139,7 +139,9 @@ export default function App() {
         <BillEditor
           items={items}
           billNo={billNo}
+          tableNo={receiptInfo.tableNo}
           onNextBill={handleNextBill}
+          onTableNoChange={(val) => setReceiptInfo((prev) => ({ ...prev, tableNo: val }))}
           onAddItem={handleAddItem}
           onAddNamedItem={handleAddNamedItem}
           onUpdateItem={handleUpdateItem}

@@ -8,7 +8,9 @@ import { formatCurrency } from '../utils/formatters';
 export default function BillEditor({
   items,
   billNo,
+  tableNo,
   onNextBill,
+  onTableNoChange,
   onAddItem,
   onAddNamedItem,
   onUpdateItem,
@@ -70,6 +72,18 @@ export default function BillEditor({
           </div>
 
           <div className="editor-quick-tools">
+            <div className="table-no-inline-group" title="Table number — changes are saved instantly">
+              <label htmlFor="table-no-inline" className="table-no-inline-label">Table</label>
+              <input
+                id="table-no-inline"
+                type="text"
+                className="table-no-inline-input"
+                value={tableNo || ''}
+                onChange={(e) => onTableNoChange(e.target.value)}
+                placeholder="No."
+              />
+            </div>
+
             <button
               type="button"
               className="btn btn-outline-sm"
