@@ -11,11 +11,7 @@ import {
   generateDynamicBillNo,
 } from './utils/formatters';
 
-const DEFAULT_SAMPLE_ITEMS = [
-  { id: '1', name: 'channa chat', category: 'FOOD', quantity: 1, unitPrice: 30 },
-  { id: '2', name: 'fried rice', category: 'FOOD', quantity: 1, unitPrice: 300 },
-  { id: '3', name: 'godfather beer offer', category: 'LIQUOR', quantity: 1, unitPrice: 999 },
-];
+
 
 const DEFAULT_RECEIPT_INFO = {
   hotelName: 'YES BAITHAK',
@@ -29,7 +25,7 @@ const DEFAULT_RECEIPT_INFO = {
 export default function App() {
   const [receiptInfo, setReceiptInfo] = useState(DEFAULT_RECEIPT_INFO);
   const [billNo, setBillNo] = useState('3249');
-  const [items, setItems] = useState(DEFAULT_SAMPLE_ITEMS);
+  const [items, setItems] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Live dynamic date & time state
@@ -69,6 +65,18 @@ export default function App() {
     setItems((prev) => [...prev, newItem]);
   };
 
+  // Add a new named item row (used by ItemAutocomplete — name pre-filled, price left blank)
+  const handleAddNamedItem = (name, category = 'FOOD') => {
+    const newItem = {
+      id: Date.now().toString() + Math.random().toString().slice(2, 6),
+      name: name,
+      category: category,
+      quantity: 1,
+      unitPrice: '',
+    };
+    setItems((prev) => [...prev, newItem]);
+  };
+
   // Update specific item properties
   const handleUpdateItem = (id, fieldsToUpdate) => {
     setItems((prev) =>
@@ -92,12 +100,7 @@ export default function App() {
     setItems([]);
   };
 
-  // Reset / Load YES BAITHAK Sample Data
-  const handleLoadSampleData = () => {
-    setReceiptInfo(DEFAULT_RECEIPT_INFO);
-    setBillNo('3249');
-    setItems(DEFAULT_SAMPLE_ITEMS);
-  };
+
 
   // Save Header & Details configuration from Modal
   const handleSaveHeaderFooter = (updatedFields) => {
@@ -138,10 +141,10 @@ export default function App() {
           billNo={billNo}
           onNextBill={handleNextBill}
           onAddItem={handleAddItem}
+          onAddNamedItem={handleAddNamedItem}
           onUpdateItem={handleUpdateItem}
           onDeleteItem={handleDeleteItem}
           onClearAll={handleClearAll}
-          onLoadSampleData={handleLoadSampleData}
           summary={summary}
         />
 
