@@ -79,7 +79,7 @@ export default function ItemAutocomplete({
   const confirmSelection = (index) => {
     const chosen = suggestions[index];
     if (!chosen) return;
-    onAddItem(chosen.name, category);
+    onAddItem(chosen.name, category, chosen.price);
     setQuery('');
     setSuggestions([]);
     setActiveIndex(-1);
@@ -195,7 +195,7 @@ export default function ItemAutocomplete({
         >
           {suggestions.slice(0, 50).map((item, index) => (
             <li
-              key={item.id}
+              key={item.id || item.name || index}
               id={`ac-item-${category}-${index}`}
               data-index={index}
               role="option"
@@ -205,6 +205,9 @@ export default function ItemAutocomplete({
               onMouseEnter={() => setActiveIndex(index)}
             >
               <span className="autocomplete-option-name">{item.name}</span>
+              {item.price !== undefined && item.price !== null && item.price !== '' && (
+                <span className="autocomplete-option-meta">₹{item.price}</span>
+              )}
               {item.size && (
                 <span className="autocomplete-option-meta">{item.size}</span>
               )}

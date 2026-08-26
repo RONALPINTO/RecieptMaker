@@ -27,6 +27,7 @@ export default function App() {
   const [billNo, setBillNo] = useState('3249');
   const [items, setItems] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [billType, setBillType] = useState('AC');
 
   // Live dynamic date & time state
   const [currentDate, setCurrentDate] = useState(getCurrentFormattedDate());
@@ -65,14 +66,14 @@ export default function App() {
     setItems((prev) => [...prev, newItem]);
   };
 
-  // Add a new named item row (used by ItemAutocomplete — name pre-filled, price left blank)
-  const handleAddNamedItem = (name, category = 'FOOD') => {
+  // Add a new named item row (used by ItemAutocomplete — name and price pre-filled)
+  const handleAddNamedItem = (name, category = 'FOOD', price = '') => {
     const newItem = {
       id: Date.now().toString() + Math.random().toString().slice(2, 6),
       name: name,
       category: category,
       quantity: 1,
-      unitPrice: '',
+      unitPrice: price !== undefined && price !== null ? price : '',
     };
     setItems((prev) => [...prev, newItem]);
   };
@@ -140,6 +141,8 @@ export default function App() {
           items={items}
           billNo={billNo}
           tableNo={receiptInfo.tableNo}
+          billType={billType}
+          onBillTypeChange={setBillType}
           onNextBill={handleNextBill}
           onTableNoChange={(val) => setReceiptInfo((prev) => ({ ...prev, tableNo: val }))}
           onAddItem={handleAddItem}

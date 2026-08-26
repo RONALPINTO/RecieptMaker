@@ -1,14 +1,31 @@
 import React from 'react';
 import BillItemRow from './BillItemRow';
 import ItemAutocomplete from './ItemAutocomplete';
-import { foodItems } from '../utils/FoodData';
-import { liquorItems } from '../utils/LiquorData';
+import * as acData     from '../utils/data/ac.js';
+import * as nonAcData  from '../utils/data/nonAc.js';
+import * as familyData from '../utils/data/family.js';
 import { formatCurrency } from '../utils/formatters';
+
+// Bill type options shown in the selector pill
+const BILL_TYPES = [
+  { value: 'AC',     label: 'AC' },
+  { value: 'NON_AC', label: 'NON AC' },
+  { value: 'FAMILY', label: 'FAMILY' },
+];
+
+// Direct mapping: bill type → data file
+const DATA_MAP = {
+  AC:     acData,
+  NON_AC: nonAcData,
+  FAMILY: familyData,
+};
 
 export default function BillEditor({
   items,
   billNo,
   tableNo,
+  billType,
+  onBillTypeChange,
   onNextBill,
   onTableNoChange,
   onAddItem,
@@ -18,6 +35,8 @@ export default function BillEditor({
   onClearAll,
   summary,
 }) {
+  // Resolve food/liquor arrays directly from the correct data file
+  const menuData = DATA_MAP[(billType || 'AC').toUpperCase()] || acData;
   const foodItems_bill = items.filter((item) => (item.category || 'FOOD').toUpperCase() === 'FOOD');
   const liquorItems_bill = items.filter((item) => (item.category || 'FOOD').toUpperCase() === 'LIQUOR');
   const otherItems = items.filter((item) => {
@@ -72,6 +91,20 @@ export default function BillEditor({
           </div>
 
           <div className="editor-quick-tools">
+            {/* Bill Type Selector */}
+            <div className="bill-type-selector" title="Select bill type to load the correct menu">
+              {BILL_TYPES.map((bt) => (
+                <button
+                  key={bt.value}
+                  type="button"
+                  className={`bill-type-btn${billType === bt.value ? ' bill-type-btn--active' : ''}`}
+                  onClick={() => onBillTypeChange(bt.value)}
+                >
+                  {bt.label}
+                </button>
+              ))}
+            </div>
+
             <div className="table-no-inline-group" title="Table number — changes are saved instantly">
               <label htmlFor="table-no-inline" className="table-no-inline-label">Table</label>
               <input
@@ -131,7 +164,7 @@ export default function BillEditor({
             {/* Food autocomplete search bar */}
             <div className="section-autocomplete-bar">
               <ItemAutocomplete
-                items={foodItems}
+                items={menuData.food}
                 category="FOOD"
                 onAddItem={onAddNamedItem}
                 placeholder="Search food item (e.g. CHICKEN 65)…"
@@ -185,7 +218,7 @@ export default function BillEditor({
             {/* Liquor autocomplete search bar */}
             <div className="section-autocomplete-bar">
               <ItemAutocomplete
-                items={liquorItems}
+                items={menuData.liquor}
                 category="LIQUOR"
                 onAddItem={onAddNamedItem}
                 placeholder="Search liquor item (e.g. BLACK DOG)…"
