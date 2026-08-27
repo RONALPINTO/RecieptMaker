@@ -1,6 +1,4 @@
-// utils/data/ac.js
-// Menu data for the AC bill type.
-// Replace with actual AC-specific menu items when available.
+
 
 export const food = [
   { name: "CHICKEN BIRYANI", price: 250 },

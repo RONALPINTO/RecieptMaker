@@ -1,6 +1,3 @@
-// utils/data/nonAc.js
-// Menu data for the NON AC bill type.
-// Replace with actual NON-AC-specific menu items when available.
 
 export const food = [
   { name: "CHICKEN BIRYANI", price: 220 },

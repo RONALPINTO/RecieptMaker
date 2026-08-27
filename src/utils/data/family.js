@@ -1,6 +1,3 @@
-// utils/data/family.js
-// Menu data for the FAMILY bill type.
-// Replace with actual FAMILY-specific menu items when available.
 
 export const food = [
   { name: "VEG THALI", price: 180 },
