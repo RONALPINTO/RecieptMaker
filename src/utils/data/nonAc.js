@@ -315,6 +315,7 @@ export const food = [
   { name: "HF PANEER CHILLY", price: 140 },
   { name: "HF CHICKEN CHILLY", price: 140 },
   { name: "HF CHICKEN TIKKA", price: 180 }
+  { name: "test", price: 10 }
 ];
 
 export const liquor = [
